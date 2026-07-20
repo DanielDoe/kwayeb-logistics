@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowRight, Check } from "lucide-react";
 import { SHIPPING_ROUTES } from "@/lib/constants";
+import { SectionHeader } from "@/components/ui/section-header";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 export const metadata: Metadata = {
   title: "Shipping Routes",
@@ -10,60 +14,67 @@ export const metadata: Metadata = {
 
 export default function RoutesPage() {
   return (
-    <div className="py-16">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-navy-950 dark:text-white sm:text-4xl">
-            Our Shipping Routes
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-slate-600 dark:text-slate-400">
-            We ship from China to destinations worldwide. Air freight for speed,
-            sea freight for volume — we help you choose the best option.
-          </p>
-        </div>
+    <div className="relative py-16 sm:py-24">
+      <div className="glow-orb left-1/4 top-0 h-80 w-80 bg-[var(--glow-secondary)]" />
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          eyebrow="Global network"
+          title="Our Shipping Routes"
+          description="We ship from China to destinations worldwide. Air freight for speed, sea freight for volume — we help you choose the best option."
+        />
+
+        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {SHIPPING_ROUTES.map((route) => (
-            <article
+            <Card
               key={route.id}
-              className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-gold-500/40 hover:shadow-md dark:border-white/10 dark:bg-navy-950"
+              className="group transition hover:-translate-y-1 hover:border-amber-500/30 hover:shadow-lg dark:hover:shadow-amber-500/5"
             >
-              <div className="flex items-center gap-4">
-                <span className="text-4xl">{route.flag}</span>
-                <div>
-                  <h2 className="text-xl font-bold text-navy-950 dark:text-white">
-                    China → {route.destination}
-                  </h2>
-                  <p className="text-sm text-gold-600">{route.region}</p>
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4">
+                  <span className="text-4xl">{route.flag}</span>
+                  <div>
+                    <h2 className="text-xl font-bold text-foreground">
+                      China → {route.destination}
+                    </h2>
+                    <p className="text-sm font-medium text-accent-text">{route.region}</p>
+                  </div>
                 </div>
-              </div>
-              <p className="mt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                {route.description}
-              </p>
-              <ul className="mt-4 space-y-1.5 text-sm text-slate-500">
-                <li>✓ Air & sea freight available</li>
-                <li>✓ Customs documentation included</li>
-                <li>✓ Real-time shipment tracking</li>
-              </ul>
-            </article>
+                <p className="mt-4 text-sm leading-relaxed text-muted">
+                  {route.description}
+                </p>
+                <ul className="mt-5 space-y-2">
+                  {["Air & sea freight", "Customs documentation", "Real-time tracking"].map(
+                    (item) => (
+                      <li key={item} className="flex items-center gap-2 text-sm text-muted">
+                        <Check className="h-3.5 w-3.5 text-amber-500" />
+                        {item}
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </CardContent>
+            </Card>
           ))}
         </div>
 
-        <div className="mt-16 rounded-2xl bg-navy-950 p-8 text-center sm:p-12">
-          <h2 className="text-2xl font-bold text-white">
-            Don&apos;t see your country?
-          </h2>
-          <p className="mx-auto mt-3 max-w-lg text-slate-400">
-            We ship to many more destinations. Submit a request and we&apos;ll
-            confirm availability and pricing for your location.
-          </p>
-          <Link
-            href="/source"
-            className="mt-6 inline-flex rounded-lg bg-gold-500 px-8 py-3 font-semibold text-navy-950 transition hover:bg-gold-400"
-          >
-            Request a Quote
-          </Link>
-        </div>
+        <Card className="mt-16 overflow-hidden border-amber-500/20 bg-gradient-to-br from-accent-soft to-transparent">
+          <CardContent className="p-10 text-center sm:p-14">
+            <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
+              Don&apos;t see your country?
+            </h2>
+            <p className="mx-auto mt-3 max-w-lg text-muted">
+              We ship to many more destinations. Submit a request and we&apos;ll confirm
+              availability and pricing for your location.
+            </p>
+            <Link href="/source" className="mt-8 inline-block">
+              <Button size="lg" className="group gap-2">
+                Request a Quote
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

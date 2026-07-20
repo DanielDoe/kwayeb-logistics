@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 import { SITE } from "@/lib/constants";
+import { THEME_STORAGE_KEY, SCHEME_STORAGE_KEY } from "@/lib/theme";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -40,17 +42,25 @@ export const metadata: Metadata = {
   },
 };
 
+const themeScript = `(function(){try{var m=localStorage.getItem("${THEME_STORAGE_KEY}");if(m==="dark")document.documentElement.classList.add("dark");var s=localStorage.getItem("${SCHEME_STORAGE_KEY}");document.documentElement.setAttribute("data-scheme",s||"navy")}catch(e){document.documentElement.setAttribute("data-scheme","navy")}})()`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full`}>
-      <body className="min-h-full flex flex-col bg-white text-navy-950 antialiased dark:bg-navy-950 dark:text-white">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="min-h-full flex flex-col bg-background text-foreground antialiased">
+        <div className="pointer-events-none fixed inset-0 grid-bg opacity-30 dark:opacity-25" aria-hidden />
+        <ThemeProvider>
+          <Header />
+          <main className="relative flex-1">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

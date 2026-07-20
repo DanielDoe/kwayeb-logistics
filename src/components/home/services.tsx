@@ -1,79 +1,162 @@
-import type { ReactNode } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowUpRight,
+  FileCheck,
+  Headphones,
+  Package,
+  Search,
+  Shield,
+  Ship,
+  Warehouse,
+} from "lucide-react";
 import { SERVICES } from "@/lib/constants";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
-const ICONS: Record<string, ReactNode> = {
-  search: (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-    </svg>
-  ),
-  ship: (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
-    </svg>
-  ),
-  track: (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-    </svg>
-  ),
-  document: (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-    </svg>
-  ),
-  warehouse: (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819" />
-    </svg>
-  ),
-  payment: (
-    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-    </svg>
-  ),
-};
+const ICONS = {
+  search: Search,
+  ship: Ship,
+  track: Package,
+  document: FileCheck,
+  warehouse: Warehouse,
+  payment: Shield,
+  support: Headphones,
+} as const;
 
 export function Services() {
-  return (
-    <section className="py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-wider text-gold-600">
-            What we offer
-          </p>
-          <h2 className="mt-2 text-3xl font-bold text-navy-950 dark:text-white sm:text-4xl">
-            More than shipping — full China logistics
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-slate-600 dark:text-slate-400">
-            Tell us what you need. We source products from China, handle
-            logistics, and deliver to your country — all in one place.
-          </p>
-        </div>
+  const featured = SERVICES.find((s) => "featured" in s && s.featured) ?? SERVICES[0];
+  const grid = SERVICES.filter((s) => s.title !== featured.title);
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((service) => (
-            <div
-              key={service.title}
-              className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-navy-950"
-            >
-              {"comingSoon" in service && service.comingSoon && (
-                <span className="absolute right-4 top-4 rounded-full bg-gold-500/15 px-2.5 py-0.5 text-xs font-medium text-gold-600">
-                  Coming soon
-                </span>
-              )}
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/15 text-gold-600">
-                {ICONS[service.icon]}
-              </div>
-              <h3 className="mt-4 text-lg font-semibold text-navy-950 dark:text-white">
-                {service.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                {service.description}
-              </p>
+  return (
+    <section id="services" className="relative overflow-hidden bg-white py-14 scroll-mt-20 sm:py-16 lg:py-20">
+      {/* Map + pins background */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <Image
+          src="/images/services-map-bg.png"
+          alt=""
+          fill
+          className="object-cover object-top opacity-[0.55]"
+          sizes="100vw"
+          priority={false}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/70 to-white" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <ScrollReveal variant="fade-up">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="mx-auto mb-3 flex h-8 w-8 items-center justify-center text-[#ff6600]">
+              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
+                <circle cx="12" cy="12" r="2.5" />
+                <circle cx="6" cy="10" r="1.5" opacity="0.7" />
+                <circle cx="18" cy="10" r="1.5" opacity="0.7" />
+                <circle cx="8" cy="16" r="1.5" opacity="0.55" />
+                <circle cx="16" cy="16" r="1.5" opacity="0.55" />
+                <path
+                  d="M6 10c2-1 4-1.5 6-1.5S16 9 18 10M8 16c1.5-1.5 3.5-2.5 4-2.5s2.5 1 4 2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  opacity="0.5"
+                />
+              </svg>
             </div>
-          ))}
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#ff6600]">
+              What we offer
+            </p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-[#0a1d37] sm:text-4xl lg:text-[2.5rem]">
+              More than shipping —{" "}
+              <span className="text-[#ff6600]">full China logistics</span>
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#52667a] sm:text-lg">
+              Tell us what you need. We source products from China, handle logistics, and deliver to
+              your country — all in one place.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <div className="mt-14 grid gap-5 lg:grid-cols-12 lg:gap-6">
+          {/* Featured navy card */}
+          <ScrollReveal className="lg:col-span-4" variant="fade-up">
+            <article className="relative flex h-full min-h-[520px] flex-col overflow-hidden rounded-2xl bg-[#0a1d37] shadow-[0_16px_50px_-20px_rgba(10,29,55,0.45)]">
+              <div className="relative z-10 flex flex-1 flex-col p-7 sm:p-8">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#ff6600] text-white shadow-lg shadow-orange-500/30">
+                    <Search className="h-5 w-5" strokeWidth={2} />
+                  </div>
+                  <span className="rounded-full bg-[#ff6600] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#0a1d37]">
+                    Core service
+                  </span>
+                </div>
+
+                <h3 className="mt-8 text-2xl font-bold text-white sm:text-3xl">{featured.title}</h3>
+                <span className="mt-3 block h-1 w-12 rounded-full bg-[#ff6600]" />
+                <p className="mt-5 text-sm leading-relaxed text-white/80 sm:text-[15px]">
+                  {featured.description}
+                </p>
+
+                <Link
+                  href="/source"
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white transition hover:gap-3"
+                >
+                  Start a request
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+
+              <div className="relative mt-auto h-48 w-full sm:h-56">
+                <Image
+                  src={featured.image}
+                  alt={featured.title}
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-[#0a1d37]/40" />
+              </div>
+            </article>
+          </ScrollReveal>
+
+          {/* 6 small cards */}
+          <div className="grid gap-5 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-3 lg:gap-5">
+            {grid.map((service, i) => {
+              const Icon = ICONS[service.icon as keyof typeof ICONS] ?? Package;
+              const num = String(i + 2).padStart(2, "0");
+
+              return (
+                <ScrollReveal key={service.title} delay={i * 60} variant="fade-up">
+                  <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-[0_8px_30px_-14px_rgba(10,29,55,0.12)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_-16px_rgba(10,29,55,0.18)]">
+                    <div className="flex flex-1 flex-col p-5 pb-4">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#fff4ed] text-[#ff6600]">
+                          <Icon className="h-5 w-5" strokeWidth={1.75} />
+                        </div>
+                        <span className="font-mono text-xs font-medium text-slate-300">{num}</span>
+                      </div>
+                      <h3 className="mt-4 text-base font-bold text-[#0a1d37]">{service.title}</h3>
+                      <p className="mt-2 flex-1 text-sm leading-relaxed text-[#52667a]">
+                        {service.description}
+                      </p>
+                      {"comingSoon" in service && service.comingSoon && (
+                        <span className="mt-3 inline-flex w-fit rounded-full bg-[#fff4ed] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#ff6600]">
+                          Coming soon
+                        </span>
+                      )}
+                    </div>
+                    <div className="relative mx-3 mb-3 h-28 overflow-hidden rounded-xl sm:h-32">
+                      <Image
+                        src={service.image}
+                        alt={service.title}
+                        fill
+                        className="object-cover transition duration-500 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      />
+                    </div>
+                  </article>
+                </ScrollReveal>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

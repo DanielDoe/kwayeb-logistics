@@ -1,42 +1,51 @@
+import Image from "next/image";
 import { HOW_IT_WORKS } from "@/lib/constants";
+import { HowItWorksSteps } from "@/components/home/how-it-works-steps";
+import { HowItWorksTrustBar } from "@/components/home/how-it-works-trust-bar";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export function HowItWorks() {
   return (
-    <section className="bg-slate-50 py-20 dark:bg-navy-900">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-wider text-gold-600">
-            How we work
-          </p>
-          <h2 className="mt-2 text-3xl font-bold text-navy-950 dark:text-white sm:text-4xl">
-            From China to your country in 4 simple steps
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-slate-600 dark:text-slate-400">
-            Whether you need products sourced or goods shipped, we handle the
-            entire journey — so you can focus on growing your business.
-          </p>
-        </div>
+    <section
+      id="how-it-works"
+      className="relative overflow-hidden bg-white py-14 scroll-mt-20 sm:py-16 lg:py-20"
+    >
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <Image
+          src="/images/how-it-works-map-bg.png"
+          alt=""
+          fill
+          className="object-cover object-center opacity-[0.55] sm:opacity-[0.62]"
+          sizes="100vw"
+          priority={false}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/35 via-white/20 to-white/75" />
+      </div>
 
-        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {HOW_IT_WORKS.map((item, index) => (
-            <div key={item.step} className="relative">
-              {index < HOW_IT_WORKS.length - 1 && (
-                <div className="absolute left-1/2 top-8 hidden h-px w-full bg-gold-300 lg:block" />
-              )}
-              <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-navy-950">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gold-500 text-sm font-bold text-navy-950">
-                  {item.step}
-                </span>
-                <h3 className="mt-4 text-lg font-semibold text-navy-950 dark:text-white">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                  {item.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <ScrollReveal variant="fade-up">
+          <div className="mx-auto w-full max-w-3xl text-center">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#ff6600] sm:text-xs">
+              How we work
+            </p>
+
+            <h2 className="mt-3 text-center text-[1.75rem] font-bold leading-tight tracking-tight text-[#0a1d37] sm:mt-4 sm:text-4xl lg:text-[2.375rem]">
+              From China to your country in{" "}
+              <span className="text-[#ff6600]">4 simple steps</span>
+            </h2>
+
+            <p className="mx-auto mt-4 max-w-2xl text-center text-[15px] leading-[1.7] text-[#64748b] sm:mt-5 sm:text-base">
+              Whether you need products sourced or goods shipped, we handle the entire journey — so
+              you can focus on growing your business.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <HowItWorksSteps steps={HOW_IT_WORKS} />
+
+        <ScrollReveal variant="fade-up" delay={150}>
+          <HowItWorksTrustBar />
+        </ScrollReveal>
       </div>
     </section>
   );
