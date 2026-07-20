@@ -13,7 +13,7 @@ export const SHIPPING_ROUTES = [
     region: "West Africa",
     flag: "🇬🇭",
     description: "Fast, reliable shipping from China to Accra and beyond.",
-    image: "/images/routes/ghana.png",
+    image: "/images/routes/ghana.webp",
   },
   {
     id: "usa",
@@ -21,7 +21,7 @@ export const SHIPPING_ROUTES = [
     region: "North America",
     flag: "🇺🇸",
     description: "Door-to-door delivery across all 50 states.",
-    image: "/images/routes/usa.png",
+    image: "/images/routes/usa.webp",
   },
   {
     id: "uk",
@@ -29,7 +29,7 @@ export const SHIPPING_ROUTES = [
     region: "Europe",
     flag: "🇬🇧",
     description: "Express and economy options to London and nationwide.",
-    image: "/images/routes/uk.png",
+    image: "/images/routes/uk.webp",
     tint: "mint",
   },
   {
@@ -38,7 +38,7 @@ export const SHIPPING_ROUTES = [
     region: "Oceania",
     flag: "🇦🇺",
     description: "Reliable sea and air freight to Sydney, Melbourne & more.",
-    image: "/images/routes/australia.png",
+    image: "/images/routes/australia.webp",
   },
   {
     id: "germany",
@@ -46,7 +46,7 @@ export const SHIPPING_ROUTES = [
     region: "Europe",
     flag: "🇩🇪",
     description: "Efficient logistics hub for Central European delivery.",
-    image: "/images/routes/germany.png",
+    image: "/images/routes/germany.webp",
   },
   {
     id: "europe",
@@ -54,7 +54,7 @@ export const SHIPPING_ROUTES = [
     region: "Europe",
     flag: "🇪🇺",
     description: "France, Spain, Italy, Netherlands, Poland & every EU nation.",
-    image: "/images/routes/europe.png",
+    image: "/images/routes/europe.webp",
   },
   {
     id: "africa",
@@ -62,7 +62,7 @@ export const SHIPPING_ROUTES = [
     region: "Africa",
     flag: "🌍",
     description: "Pan-African shipping from Nigeria to Kenya, South Africa & more.",
-    image: "/images/routes/africa.png",
+    image: "/images/routes/africa.webp",
   },
 ] as const;
 
@@ -99,7 +99,7 @@ export const SERVICES = [
     description:
       "Can't find a supplier? Tell us what you need — electronics, fashion, machinery, or anything else — and we'll source it from verified Chinese manufacturers.",
     icon: "search",
-    image: "/images/services/sourcing.png",
+    image: "/images/services/sourcing.webp",
     featured: true,
   },
   {
@@ -107,35 +107,35 @@ export const SERVICES = [
     description:
       "Air freight, sea freight, and express courier options tailored to your budget and timeline.",
     icon: "ship",
-    image: "/images/services/shipping.png",
+    image: "/images/services/shipping.webp",
   },
   {
     title: "Shipment Tracking",
     description:
       "Real-time tracking from warehouse departure to final delivery at your address.",
     icon: "track",
-    image: "/images/services/tracking.png",
+    image: "/images/services/tracking.webp",
   },
   {
     title: "Customs & Compliance",
     description:
       "We manage documentation, duties guidance, and regulatory requirements for every destination.",
     icon: "document",
-    image: "/images/services/customs.png",
+    image: "/images/services/customs.webp",
   },
   {
     title: "Warehouse Consolidation",
     description:
       "Combine multiple orders into one shipment to save on freight costs.",
     icon: "warehouse",
-    image: "/images/services/warehouse.png",
+    image: "/images/services/warehouse.webp",
   },
   {
     title: "Secure Payments",
     description:
       "Safe payment options coming soon — pay for sourcing and shipping with confidence.",
     icon: "payment",
-    image: "/images/services/payments.png",
+    image: "/images/services/payments.webp",
     comingSoon: true,
   },
   {
@@ -143,7 +143,7 @@ export const SERVICES = [
     description:
       "Our logistics experts are here to support you every step of the way.",
     icon: "support",
-    image: "/images/services/support.png",
+    image: "/images/services/support.webp",
   },
 ] as const;
 

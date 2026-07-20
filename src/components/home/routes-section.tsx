@@ -11,11 +11,11 @@ export function RoutesSection() {
       {/* Map graphic behind header */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px]" aria-hidden>
         <Image
-          src="/images/routes-map-bg.png"
+          src="/images/routes-map-bg.webp"
           alt=""
           fill
           className="object-contain object-right-top opacity-90 sm:object-cover"
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, 100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#f7f8fa] via-[#f7f8fa]/75 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#f7f8fa]" />
@@ -113,7 +113,7 @@ function RouteCard({ route }: { route: Route }) {
         </div>
       </div>
 
-      <div className="relative mx-3 mb-3 h-36 overflow-hidden rounded-xl sm:h-40">
+      <div className="relative mx-3 mb-3 aspect-[16/10] overflow-hidden rounded-xl">
         <Image
           src={route.image}
           alt={`${route.destination} landmark`}

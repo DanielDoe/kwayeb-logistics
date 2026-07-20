@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -10,6 +9,7 @@ import {
   Tag,
 } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { ArtDirectedBackground } from "@/components/ui/responsive-image";
 
 const FEATURE_PILLS = [
   { icon: Clock, label: "Fast Response" },
@@ -33,13 +33,11 @@ export function CtaBanner() {
           <div className="relative overflow-hidden rounded-[28px] shadow-[0_24px_80px_-24px_rgba(10,29,55,0.35)] sm:rounded-[36px] lg:rounded-[44px]">
             {/* Background photo — exact logistics scene */}
             <div className="absolute inset-0">
-              <Image
-                src="/images/hero-background.png"
+              <ArtDirectedBackground
                 alt=""
-                fill
-                className="object-cover object-[78%_center]"
-                sizes="100vw"
-                priority={false}
+                mobile="/images/hero-mobile.webp"
+                tablet="/images/hero-tablet.webp"
+                desktop="/images/hero-desktop.webp"
               />
               {/* Soft white veil so content reads like the reference */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/82 via-white/58 to-white/20" />

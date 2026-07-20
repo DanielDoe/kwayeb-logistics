@@ -63,7 +63,7 @@ export function Footer() {
     <footer className="relative overflow-hidden bg-[#071526] text-white">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <Image
-          src="/images/routes-map-bg.png"
+          src="/images/routes-map-bg.webp"
           alt=""
           fill
           className="scale-110 object-contain object-right-bottom opacity-[0.22] brightness-200 contrast-125 saturate-150"

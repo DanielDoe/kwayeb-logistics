@@ -12,11 +12,11 @@ export function HowItWorks() {
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <Image
-          src="/images/how-it-works-map-bg.png"
+          src="/images/how-it-works-map-bg.webp"
           alt=""
           fill
           className="object-cover object-center opacity-[0.55] sm:opacity-[0.62]"
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, 100vw"
           priority={false}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-white/35 via-white/20 to-white/75" />

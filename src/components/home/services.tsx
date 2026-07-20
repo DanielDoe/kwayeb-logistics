@@ -32,11 +32,11 @@ export function Services() {
       {/* Map + pins background */}
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <Image
-          src="/images/services-map-bg.png"
+          src="/images/services-map-bg.webp"
           alt=""
           fill
           className="object-cover object-top opacity-[0.55]"
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, 100vw"
           priority={false}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/70 to-white" />
@@ -104,13 +104,13 @@ export function Services() {
                 </Link>
               </div>
 
-              <div className="relative mt-auto h-48 w-full sm:h-56">
+              <div className="relative mt-auto aspect-[16/10] w-full sm:aspect-[16/9]">
                 <Image
                   src={featured.image}
                   alt={featured.title}
                   fill
                   className="object-cover object-center"
-                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-[#0a1d37]/40" />
               </div>
@@ -143,7 +143,7 @@ export function Services() {
                         </span>
                       )}
                     </div>
-                    <div className="relative mx-3 mb-3 h-28 overflow-hidden rounded-xl sm:h-32">
+                    <div className="relative mx-3 mb-3 aspect-[16/10] overflow-hidden rounded-xl">
                       <Image
                         src={service.image}
                         alt={service.title}
