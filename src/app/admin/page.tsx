@@ -9,6 +9,7 @@ import { getStaffHomePath } from "@/lib/auth/roles";
 import { getUserProfile } from "@/lib/supabase/server-auth";
 
 import { AdminKpiGrid } from "@/components/admin/admin-kpi-grid";
+import { AdminPageIntro } from "@/components/admin/admin-page-intro";
 
 import { getGreeting } from "@/lib/admin/workspace-demo-data";
 
@@ -38,15 +39,11 @@ export default async function AdminExecutivePage() {
 
     <>
 
-      <div className="mb-8">
-
+      <AdminPageIntro>
         <p className="text-sm font-medium text-muted">Kwayeb Logistics · Administration</p>
-
         <h1 className="mt-1 text-2xl font-bold text-foreground sm:text-3xl">{getGreeting(profile.full_name)}</h1>
-
         <p className="mt-1 text-muted">Company-level overview across all departments.</p>
-
-      </div>
+      </AdminPageIntro>
 
 
 

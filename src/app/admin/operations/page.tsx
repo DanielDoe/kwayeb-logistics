@@ -5,6 +5,7 @@ import { getUserProfile } from "@/lib/supabase/server-auth";
 import { AdminActionQueue } from "@/components/admin/admin-action-queue";
 
 import { AdminKpiGrid } from "@/components/admin/admin-kpi-grid";
+import { AdminPageIntro } from "@/components/admin/admin-page-intro";
 
 import { getGreeting, OPERATIONS_ACTION_QUEUE } from "@/lib/admin/workspace-demo-data";
 
@@ -22,19 +23,13 @@ export default async function OperationsControlCenterPage() {
 
     <>
 
-      <div className="mb-8">
-
+      <AdminPageIntro>
         <p className="text-sm font-medium text-[#ff6600]">Operations</p>
-
         <h1 className="mt-1 text-2xl font-bold text-foreground sm:text-3xl">Operations Control Center</h1>
-
         <p className="mt-1 text-muted">
-
           {profile ? getGreeting(profile.full_name) : "Welcome"} — here&apos;s what needs attention today.
-
         </p>
-
-      </div>
+      </AdminPageIntro>
 
 
 
