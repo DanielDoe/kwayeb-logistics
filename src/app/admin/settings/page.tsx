@@ -20,11 +20,7 @@ const SECTIONS = [
 export default function AdminSettingsPage() {
   return (
     <>
-      <AdminPageHeader
-        eyebrow="System"
-        title="Settings"
-        description="Configure Kwayeb Logistics platform, staff, and integrations."
-      />
+      <AdminPageHeader />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {SECTIONS.map((section) => (
           <Link

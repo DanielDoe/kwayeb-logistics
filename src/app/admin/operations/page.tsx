@@ -24,8 +24,7 @@ export default async function OperationsControlCenterPage() {
     <>
 
       <AdminPageIntro>
-        <p className="text-sm font-medium text-[#ff6600]">Operations</p>
-        <h1 className="mt-1 text-2xl font-bold text-foreground sm:text-3xl">Operations Control Center</h1>
+        <h1 className="text-2xl font-bold text-foreground sm:text-3xl">Operations Control Center</h1>
         <p className="mt-1 text-muted">
           {profile ? getGreeting(profile.full_name) : "Welcome"} — here&apos;s what needs attention today.
         </p>

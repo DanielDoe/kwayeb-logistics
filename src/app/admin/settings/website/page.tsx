@@ -13,11 +13,7 @@ const PAGES = [
 export default function AdminWebsitePage() {
   return (
     <>
-      <AdminPageHeader
-        eyebrow="System"
-        title="Website"
-        description="Public marketing pages — preview and manage content."
-      />
+      <AdminPageHeader />
       <div className="grid gap-4 sm:grid-cols-2">
         {PAGES.map((page) => (
           <Link

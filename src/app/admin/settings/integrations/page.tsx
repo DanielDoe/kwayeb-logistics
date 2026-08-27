@@ -5,7 +5,7 @@ import { ADMIN_INTEGRATIONS } from "@/lib/admin/admin-catalog-data";
 export default function AdminIntegrationsPage() {
   return (
     <>
-      <AdminPageHeader eyebrow="System" title="Integrations" description="Third-party services connected to Kwayeb." />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_INTEGRATIONS}
         getRowKey={(r) => r.id}

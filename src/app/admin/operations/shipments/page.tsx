@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { fetchAdminShipments } from "@/lib/actions/admin";
 import { getDemoShipment } from "@/lib/admin/workspace-demo-data";
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
 
 function shipmentDetailHref(trackingId: string) {
   const slug = trackingId.toLowerCase().replace(/\s+/g, "-");
@@ -22,18 +23,9 @@ export default async function OperationsShipmentsPage() {
   return (
 
     <>
+      <AdminPageHeader />
 
-      <div className="mb-6">
-
-        <h1 className="text-2xl font-bold text-foreground">Shipments</h1>
-
-        <p className="mt-1 text-muted">Track and manage cargo from origin to delivery.</p>
-
-      </div>
-
-
-
-      <div className="overflow-hidden rounded-xl border border-border bg-white shadow-sm">
+<div className="overflow-hidden rounded-xl border border-border bg-white shadow-sm">
 
         <table className="w-full min-w-[640px] text-left text-sm">
 

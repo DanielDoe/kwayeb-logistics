@@ -5,11 +5,7 @@ import { ADMIN_BOOKINGS } from "@/lib/admin/admin-catalog-data";
 export default function AdminBookingsPage() {
   return (
     <>
-      <AdminPageHeader
-        eyebrow="Operations"
-        title="Bookings"
-        description="Carrier bookings confirmed and pending for active shipments."
-      />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_BOOKINGS}
         getRowKey={(row) => row.id}

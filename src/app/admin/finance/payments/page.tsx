@@ -1,4 +1,5 @@
 import { FINANCE_PAYMENTS } from "@/lib/admin/workspace-demo-data";
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
 
 
 
@@ -11,16 +12,9 @@ export default function FinancePaymentsPage() {
   return (
 
     <>
+      <AdminPageHeader />
 
-      <div className="mb-6">
-
-        <h1 className="text-2xl font-bold text-foreground">Payment Verification</h1>
-
-        <p className="mt-1 text-muted">Confirm customer payments before marking invoices paid.</p>
-
-      </div>
-
-      <div className="space-y-3">
+<div className="space-y-3">
 
         {pending.map((payment) => (
 

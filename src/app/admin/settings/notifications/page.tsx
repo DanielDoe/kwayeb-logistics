@@ -5,7 +5,7 @@ import { ADMIN_NOTIFICATIONS } from "@/lib/admin/admin-catalog-data";
 export default function AdminNotificationsPage() {
   return (
     <>
-      <AdminPageHeader eyebrow="System" title="Notifications" description="Alert rules for staff and customer events." />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_NOTIFICATIONS}
         getRowKey={(r) => r.id}

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { AdminActionBanner } from "@/components/admin/admin-action-banner";
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { AdminQuotePrepareForm } from "@/components/admin/admin-quote-prepare-form";
 import { fetchAdminQuoteById } from "@/lib/actions/admin";
 
@@ -23,14 +24,12 @@ export default async function AdminQuoteDetailPage({
         />
       ) : null}
 
+      <AdminPageHeader />
+
       <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <p className="text-sm font-medium text-[#ff6600]">Quote request</p>
-          <h1 className="mt-1 font-mono text-2xl font-bold text-foreground">{quote.quoteNumber}</h1>
-          <p className="mt-2 text-sm text-muted">
-            {quote.customer} · {quote.contactEmail}
-          </p>
-        </div>
+        <p className="text-sm text-muted">
+          {quote.customer} · {quote.contactEmail}
+        </p>
         <span className="rounded-full bg-amber-500/10 px-3 py-1 text-xs font-bold text-amber-700">
           {quote.statusLabel}
         </span>

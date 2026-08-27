@@ -5,11 +5,7 @@ import { ADMIN_RECEIPTS } from "@/lib/admin/admin-catalog-data";
 export default function AdminReceiptsPage() {
   return (
     <>
-      <AdminPageHeader
-        eyebrow="Warehouse"
-        title="Receipts"
-        description="Cargo received into warehouse with inspection records."
-      />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_RECEIPTS}
         getRowKey={(row) => row.id}

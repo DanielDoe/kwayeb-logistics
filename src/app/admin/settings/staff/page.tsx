@@ -9,9 +9,6 @@ export default async function AdminStaffPage() {
   return (
     <>
       <AdminPageHeader
-        eyebrow="System"
-        title="Staff"
-        description="Kwayeb staff accounts and department assignments."
         actions={
           <button type="button" className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-[var(--btn-primary-fg)]">
             Invite Staff

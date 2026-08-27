@@ -5,7 +5,7 @@ import { ADMIN_PORTS } from "@/lib/admin/admin-catalog-data";
 export default function AdminPortsPage() {
   return (
     <>
-      <AdminPageHeader eyebrow="Configuration" title="Ports" description="Sea ports used for origin and destination routing." />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_PORTS}
         getRowKey={(r) => r.id}

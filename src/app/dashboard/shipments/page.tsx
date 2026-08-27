@@ -2,7 +2,7 @@ import { Package } from "lucide-react";
 import { DashboardDetailRow } from "@/components/dashboard/dashboard-detail-row";
 import { DashboardEmptyState } from "@/components/dashboard/dashboard-empty-state";
 import { DashboardListCard, DashboardListToolbar } from "@/components/dashboard/dashboard-list-card";
-import { DashboardPageHeader } from "@/components/dashboard/dashboard-page-header";
+import { DashboardSubpageHeader } from "@/components/dashboard/dashboard-page-header";
 import { StatusBadge } from "@/components/dashboard/status-badge";
 import { getCustomerShipments } from "@/lib/actions/quotes";
 import { ButtonLink } from "@/components/ui/button";
@@ -13,11 +13,7 @@ export default async function ShipmentsPage() {
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      <DashboardPageHeader
-        eyebrow="Logistics"
-        title="Shipments"
-        description="View and track all your active and completed shipments. Tap a row to see full tracking details."
-      />
+      <DashboardSubpageHeader />
 
       {shipments.length === 0 ? (
         <DashboardEmptyState

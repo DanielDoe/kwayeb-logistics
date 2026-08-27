@@ -26,7 +26,6 @@ export default async function DashboardPage() {
     <div className="space-y-4 sm:space-y-6">
       <div className="space-y-5">
         <DashboardPageHeader
-          eyebrow="Customer portal"
           title={firstName ? `Welcome back, ${firstName}` : "Welcome back"}
           description="Track shipments, review quotes, pay invoices, and manage your Kwayeb Logistics account from one place."
         />

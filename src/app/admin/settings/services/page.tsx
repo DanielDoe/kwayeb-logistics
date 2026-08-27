@@ -5,7 +5,7 @@ import { ADMIN_SERVICES } from "@/lib/admin/admin-catalog-data";
 export default function AdminServicesPage() {
   return (
     <>
-      <AdminPageHeader eyebrow="Configuration" title="Services" description="Freight and logistics services offered by Kwayeb." />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_SERVICES}
         getRowKey={(r) => r.id}

@@ -1,5 +1,5 @@
 import { AppearanceSettings } from "@/components/theme/appearance-settings";
-import { DashboardPageHeader } from "@/components/dashboard/dashboard-page-header";
+import { DashboardSubpageHeader } from "@/components/dashboard/dashboard-page-header";
 import { getUserProfile } from "@/lib/supabase/server-auth";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -8,11 +8,7 @@ export default async function SettingsPage() {
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      <DashboardPageHeader
-        eyebrow="Account"
-        title="Settings"
-        description="Manage your profile, appearance, and notification preferences."
-      />
+      <DashboardSubpageHeader />
 
       <Card>
         <CardContent className="space-y-3 p-4 sm:p-6">

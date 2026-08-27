@@ -2,7 +2,7 @@ import { FileText } from "lucide-react";
 import { DashboardDetailRow } from "@/components/dashboard/dashboard-detail-row";
 import { DashboardEmptyState } from "@/components/dashboard/dashboard-empty-state";
 import { DashboardListCard, DashboardListToolbar } from "@/components/dashboard/dashboard-list-card";
-import { DashboardPageHeader } from "@/components/dashboard/dashboard-page-header";
+import { DashboardSubpageHeader } from "@/components/dashboard/dashboard-page-header";
 import { StatusBadge } from "@/components/dashboard/status-badge";
 import { getCustomerQuotes } from "@/lib/actions/quotes";
 import { ButtonLink } from "@/components/ui/button";
@@ -13,11 +13,7 @@ export default async function QuotesPage() {
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      <DashboardPageHeader
-        eyebrow="Pricing"
-        title="Quote requests"
-        description="Track the status of your freight quotations. Tap a row to view full quote details."
-      />
+      <DashboardSubpageHeader />
 
       {quotes.length === 0 ? (
         <DashboardEmptyState

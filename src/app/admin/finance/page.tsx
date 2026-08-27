@@ -5,6 +5,7 @@ import { fetchAdminInvoices } from "@/lib/actions/admin";
 import { getUserProfile } from "@/lib/supabase/server-auth";
 
 import { AdminKpiGrid } from "@/components/admin/admin-kpi-grid";
+import { AdminPageIntro } from "@/components/admin/admin-page-intro";
 
 import { FINANCE_PAYMENTS, getGreeting } from "@/lib/admin/workspace-demo-data";
 
@@ -24,19 +25,12 @@ export default async function FinanceCenterPage() {
 
     <>
 
-      <div className="mb-8">
-
-        <p className="text-sm font-medium text-[#ff6600]">Finance</p>
-
-        <h1 className="mt-1 text-2xl font-bold text-foreground sm:text-3xl">Finance Center</h1>
-
+      <AdminPageIntro>
+        <h1 className="text-2xl font-bold text-foreground sm:text-3xl">Finance Center</h1>
         <p className="mt-1 text-muted">
-
           {profile ? getGreeting(profile.full_name) : "Welcome"} — invoices, payments, and verification.
-
         </p>
-
-      </div>
+      </AdminPageIntro>
 
 
 

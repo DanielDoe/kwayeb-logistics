@@ -7,11 +7,7 @@ export default async function AdminTrackingPage() {
 
   return (
     <>
-      <AdminPageHeader
-        eyebrow="Operations"
-        title="Tracking"
-        description="Monitor milestone progress across all active shipments."
-      />
+      <AdminPageHeader />
       <AdminDataTable
         rows={shipments}
         getRowKey={(row) => row.id}

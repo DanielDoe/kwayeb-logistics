@@ -7,11 +7,7 @@ export default async function AdminSupportTicketsPage() {
 
   return (
     <>
-      <AdminPageHeader
-        eyebrow="Support"
-        title="Tickets"
-        description="All support tickets across categories and priority levels."
-      />
+      <AdminPageHeader />
       <AdminDataTable
         rows={tickets}
         getRowKey={(row) => row.id}

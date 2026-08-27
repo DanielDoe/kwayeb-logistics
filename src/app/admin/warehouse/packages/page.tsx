@@ -5,11 +5,7 @@ import { WAREHOUSE_PACKAGES } from "@/lib/admin/workspace-demo-data";
 export default function AdminPackagesPage() {
   return (
     <>
-      <AdminPageHeader
-        eyebrow="Warehouse"
-        title="Packages"
-        description="Individual cargo packages in warehouse storage."
-      />
+      <AdminPageHeader />
       <WarehouseInventoryGrid packages={WAREHOUSE_PACKAGES} />
     </>
   );

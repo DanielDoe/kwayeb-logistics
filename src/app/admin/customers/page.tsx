@@ -7,11 +7,7 @@ export default async function AdminCustomersPage() {
 
   return (
     <>
-      <AdminPageHeader
-        eyebrow="Customers"
-        title="Customers"
-        description="All customer and business accounts across Kwayeb Logistics."
-      />
+      <AdminPageHeader />
       <AdminDataTable
         rows={customers}
         getRowKey={(row) => row.id}

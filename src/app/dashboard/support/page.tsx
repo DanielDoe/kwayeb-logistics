@@ -1,6 +1,6 @@
 import { MessageSquare } from "lucide-react";
 import { DashboardEmptyState } from "@/components/dashboard/dashboard-empty-state";
-import { DashboardPageHeader } from "@/components/dashboard/dashboard-page-header";
+import { DashboardSubpageHeader } from "@/components/dashboard/dashboard-page-header";
 import { StatusBadge } from "@/components/dashboard/status-badge";
 import { SupportTicketForm } from "@/components/dashboard/support-ticket-form";
 import { getCustomerSupportTickets } from "@/lib/actions/support";
@@ -15,11 +15,7 @@ export default async function SupportPage() {
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      <DashboardPageHeader
-        eyebrow="Help center"
-        title="Support"
-        description="Open a ticket for help with shipments, quotes, payments, and account questions."
-      />
+      <DashboardSubpageHeader />
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>

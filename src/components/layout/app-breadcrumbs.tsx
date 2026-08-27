@@ -70,6 +70,8 @@ export function AppBreadcrumbs({ variant, role = "admin", className }: AppBreadc
   const items =
     variant === "admin" ? buildAdminBreadcrumbs(pathname, role) : buildDashboardBreadcrumbs(pathname);
 
+  if (items.length === 0) return null;
+
   return (
     <div className={cn("relative z-10", className)}>
       <BreadcrumbTrail items={items} />

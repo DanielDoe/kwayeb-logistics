@@ -1,4 +1,5 @@
 import { WAREHOUSE_PACKAGES } from "@/lib/admin/workspace-demo-data";
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
 
 
 
@@ -11,16 +12,9 @@ export default function WarehouseExceptionsPage() {
   return (
 
     <>
+      <AdminPageHeader />
 
-      <div className="mb-6">
-
-        <h1 className="text-2xl font-bold text-foreground">Warehouse Exceptions</h1>
-
-        <p className="mt-1 text-muted">Damaged, incomplete, or flagged cargo requiring attention.</p>
-
-      </div>
-
-      <div className="space-y-3">
+<div className="space-y-3">
 
         {exceptions.map((pkg) => (
 

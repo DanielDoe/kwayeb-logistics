@@ -5,11 +5,7 @@ import { ADMIN_SUPPLIERS } from "@/lib/admin/admin-catalog-data";
 export default function AdminSuppliersPage() {
   return (
     <>
-      <AdminPageHeader
-        eyebrow="Customers"
-        title="Suppliers"
-        description="China suppliers used for pickup and cargo collection."
-      />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_SUPPLIERS}
         getRowKey={(row) => row.id}

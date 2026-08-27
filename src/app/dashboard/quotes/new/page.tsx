@@ -1,4 +1,4 @@
-import { DashboardPageHeader } from "@/components/dashboard/dashboard-page-header";
+import { DashboardSubpageHeader } from "@/components/dashboard/dashboard-page-header";
 import { QuoteWizard } from "@/components/quote/quote-wizard";
 import { getUserProfile } from "@/lib/supabase/server-auth";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,11 +8,7 @@ export default async function DashboardNewQuotePage() {
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      <DashboardPageHeader
-        eyebrow="Quotes"
-        title="New quote request"
-        description="Tell us your route, cargo details, and services needed. Our team responds within 24 hours."
-      />
+      <DashboardSubpageHeader />
       <Card>
         <CardContent className="p-4 sm:p-6 lg:p-8">
           <QuoteWizard

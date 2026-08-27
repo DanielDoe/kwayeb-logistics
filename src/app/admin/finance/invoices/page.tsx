@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { fetchAdminInvoices } from "@/lib/actions/admin";
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
 
 
 
@@ -13,18 +14,9 @@ export default async function FinanceInvoicesPage() {
   return (
 
     <>
+      <AdminPageHeader />
 
-      <div className="mb-6">
-
-        <h1 className="text-2xl font-bold text-foreground">Invoices</h1>
-
-        <p className="mt-1 text-muted">Manage billing and payment status.</p>
-
-      </div>
-
-
-
-      <div className="overflow-hidden rounded-xl border border-border bg-white shadow-sm">
+<div className="overflow-hidden rounded-xl border border-border bg-white shadow-sm">
 
         <table className="w-full min-w-[640px] text-left text-sm">
 

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { DashboardPageHeader } from "@/components/dashboard/dashboard-page-header";
+import { DashboardSubpageHeader } from "@/components/dashboard/dashboard-page-header";
 import { DetailField, RecordDetailShell } from "@/components/dashboard/record-detail-shell";
 import { StatusBadge, formatCurrency } from "@/components/dashboard/status-badge";
 import { getCustomerInvoiceById } from "@/lib/actions/invoices";
@@ -17,11 +17,7 @@ export default async function InvoiceDetailPage({
 
   return (
     <RecordDetailShell backHref="/dashboard/invoices" backLabel="Back to invoices">
-      <DashboardPageHeader
-        eyebrow="Billing"
-        title={invoice.invoice_number}
-        description="Review amount, due date, and payment status for this invoice."
-      />
+      <DashboardSubpageHeader />
 
       <Card>
         <CardContent className="space-y-6 p-4 sm:p-6">

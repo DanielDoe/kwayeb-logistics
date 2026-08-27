@@ -1,13 +1,9 @@
 "use client";
 
-
-
 import { useState } from "react";
 
 import { ScanLine } from "lucide-react";
-
-
-
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
 export default function ReceiveCargoPage() {
 
   const [submitted, setSubmitted] = useState(false);
@@ -17,8 +13,9 @@ export default function ReceiveCargoPage() {
   if (submitted) {
 
     return (
-
-      <div className="mx-auto max-w-lg rounded-xl border border-border bg-white p-8 text-center shadow-sm">
+      <>
+        <AdminPageHeader />
+        <div className="mx-auto max-w-lg rounded-xl border border-border bg-white p-8 text-center shadow-sm">
 
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10 text-2xl text-emerald-600">
 
@@ -49,9 +46,8 @@ export default function ReceiveCargoPage() {
           Receive Another
 
         </button>
-
-      </div>
-
+        </div>
+      </>
     );
 
   }
@@ -59,20 +55,11 @@ export default function ReceiveCargoPage() {
 
 
   return (
+    <>
+      <AdminPageHeader />
 
-    <div className="mx-auto max-w-2xl">
-
-      <div className="mb-6 text-center">
-
-        <p className="text-sm font-semibold uppercase tracking-widest text-[#ff6600]">Receive Cargo</p>
-
-        <h1 className="mt-2 text-2xl font-bold text-foreground">Scan barcode / Enter tracking number</h1>
-
-      </div>
-
-
-
-      <div className="rounded-xl border border-border bg-white p-6 shadow-sm">
+      <div className="mx-auto max-w-2xl">
+        <div className="rounded-xl border border-border bg-white p-6 shadow-sm">
 
         <div className="flex gap-2">
 
@@ -228,12 +215,10 @@ export default function ReceiveCargoPage() {
 
         </button>
 
+        </div>
       </div>
-
-    </div>
-
+    </>
   );
-
 }
 
 

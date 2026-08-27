@@ -5,11 +5,7 @@ import { ADMIN_STATEMENTS } from "@/lib/admin/admin-catalog-data";
 export default function AdminStatementsPage() {
   return (
     <>
-      <AdminPageHeader
-        eyebrow="Finance"
-        title="Statements"
-        description="Monthly customer account statements and balances."
-      />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_STATEMENTS}
         getRowKey={(row) => row.id}

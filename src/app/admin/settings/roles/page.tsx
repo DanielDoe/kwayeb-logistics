@@ -5,11 +5,7 @@ import { STAFF_ROLES, STAFF_ROLE_LABELS } from "@/lib/auth/roles";
 export default function AdminRolesPage() {
   return (
     <>
-      <AdminPageHeader
-        eyebrow="System"
-        title="Roles & Permissions"
-        description="Department-based roles with expandable permission sets."
-      />
+      <AdminPageHeader />
       <div className="space-y-4">
         {STAFF_ROLES.map((role) => (
           <div key={role} className="rounded-xl border border-border bg-card p-5 shadow-sm">

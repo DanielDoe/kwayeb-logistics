@@ -4,6 +4,7 @@
 
 import { useState } from "react";
 
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { WarehouseInventoryGrid } from "@/components/admin/admin-workspace-widgets";
 
 import { WAREHOUSE_PACKAGES } from "@/lib/admin/workspace-demo-data";
@@ -20,49 +21,26 @@ export default function WarehouseInventoryPage() {
 
     <>
 
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-
-        <div>
-
-          <h1 className="text-2xl font-bold text-foreground">Warehouse Inventory</h1>
-
-          <p className="mt-1 text-muted">All cargo currently in warehouse storage.</p>
-
-        </div>
-
-        <div className="flex rounded-lg border border-border bg-white p-1">
-
-          <button
-
-            type="button"
-
-            onClick={() => setView("cards")}
-
-            className={`rounded-md px-3 py-1.5 text-sm font-medium ${view === "cards" ? "bg-[#0a1d37] text-white" : "text-muted"}`}
-
-          >
-
-            Cards
-
-          </button>
-
-          <button
-
-            type="button"
-
-            onClick={() => setView("table")}
-
-            className={`rounded-md px-3 py-1.5 text-sm font-medium ${view === "table" ? "bg-[#0a1d37] text-white" : "text-muted"}`}
-
-          >
-
-            Table
-
-          </button>
-
-        </div>
-
-      </div>
+      <AdminPageHeader
+        actions={
+          <div className="flex rounded-lg border border-border bg-white p-1">
+            <button
+              type="button"
+              onClick={() => setView("cards")}
+              className={`rounded-md px-3 py-1.5 text-sm font-medium ${view === "cards" ? "bg-[#0a1d37] text-white" : "text-muted"}`}
+            >
+              Cards
+            </button>
+            <button
+              type="button"
+              onClick={() => setView("table")}
+              className={`rounded-md px-3 py-1.5 text-sm font-medium ${view === "table" ? "bg-[#0a1d37] text-white" : "text-muted"}`}
+            >
+              Table
+            </button>
+          </div>
+        }
+      />
 
 
 

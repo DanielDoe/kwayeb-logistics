@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { DashboardPageHeader } from "@/components/dashboard/dashboard-page-header";
+import { DashboardSubpageHeader } from "@/components/dashboard/dashboard-page-header";
 import { DetailField, RecordDetailShell } from "@/components/dashboard/record-detail-shell";
 import { StatusBadge } from "@/components/dashboard/status-badge";
 import { getCustomerQuoteById } from "@/lib/actions/quotes";
@@ -20,11 +20,7 @@ export default async function QuoteDetailPage({
 
   return (
     <RecordDetailShell backHref="/dashboard/quotes" backLabel="Back to quotes">
-      <DashboardPageHeader
-        eyebrow="Quote request"
-        title={quote.quote_number}
-        description="Review the status and route details for this freight quotation."
-      />
+      <DashboardSubpageHeader />
 
       <Card>
         <CardContent className="space-y-6 p-4 sm:p-6">

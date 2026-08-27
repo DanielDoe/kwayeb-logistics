@@ -5,11 +5,7 @@ import { ADMIN_CONSOLIDATIONS } from "@/lib/admin/admin-catalog-data";
 export default function AdminConsolidationsPage() {
   return (
     <>
-      <AdminPageHeader
-        eyebrow="Operations"
-        title="Consolidations"
-        description="Combine customer cargo into shared containers and dispatch batches."
-      />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_CONSOLIDATIONS}
         getRowKey={(row) => row.id}

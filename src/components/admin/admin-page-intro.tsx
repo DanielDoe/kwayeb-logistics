@@ -1,17 +1,8 @@
-import { AdminPageBreadcrumbs } from "@/components/admin/admin-chrome";
-
 interface AdminPageIntroProps {
   children: React.ReactNode;
 }
 
-/** Title block with breadcrumbs directly below — page content follows as normal siblings. */
+/** Title block for overview/home pages only — no breadcrumbs. */
 export function AdminPageIntro({ children }: AdminPageIntroProps) {
-  return (
-    <div className="mb-6">
-      {children}
-      <div className="mt-4">
-        <AdminPageBreadcrumbs />
-      </div>
-    </div>
-  );
+  return <div className="mb-6">{children}</div>;
 }

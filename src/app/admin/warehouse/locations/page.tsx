@@ -5,11 +5,7 @@ import { ADMIN_LOCATIONS } from "@/lib/admin/admin-catalog-data";
 export default function AdminLocationsPage() {
   return (
     <>
-      <AdminPageHeader
-        eyebrow="Warehouse"
-        title="Locations"
-        description="Warehouse zones, racks, and shelf assignments."
-      />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_LOCATIONS}
         getRowKey={(row) => row.id}

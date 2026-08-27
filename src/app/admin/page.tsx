@@ -40,8 +40,7 @@ export default async function AdminExecutivePage() {
     <>
 
       <AdminPageIntro>
-        <p className="text-sm font-medium text-muted">Kwayeb Logistics · Administration</p>
-        <h1 className="mt-1 text-2xl font-bold text-foreground sm:text-3xl">{getGreeting(profile.full_name)}</h1>
+        <h1 className="text-2xl font-bold text-foreground sm:text-3xl">{getGreeting(profile.full_name)}</h1>
         <p className="mt-1 text-muted">Company-level overview across all departments.</p>
       </AdminPageIntro>
 

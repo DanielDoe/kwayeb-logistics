@@ -5,7 +5,7 @@ import { ADMIN_AUDIT_LOGS } from "@/lib/admin/admin-catalog-data";
 export default function AdminAuditLogsPage() {
   return (
     <>
-      <AdminPageHeader eyebrow="System" title="Audit Logs" description="System activity and staff action history." />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_AUDIT_LOGS}
         getRowKey={(r) => r.id}

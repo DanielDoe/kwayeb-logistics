@@ -1,4 +1,5 @@
 import { fetchAdminCustomers } from "@/lib/actions/admin";
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
 
 
 
@@ -11,16 +12,9 @@ export default async function SupportCustomersPage() {
   return (
 
     <>
+      <AdminPageHeader />
 
-      <div className="mb-6">
-
-        <h1 className="text-2xl font-bold text-foreground">Customers</h1>
-
-        <p className="mt-1 text-muted">Customer context for support conversations.</p>
-
-      </div>
-
-      <div className="overflow-hidden rounded-xl border border-border bg-white shadow-sm">
+<div className="overflow-hidden rounded-xl border border-border bg-white shadow-sm">
 
         <table className="w-full text-left text-sm">
 

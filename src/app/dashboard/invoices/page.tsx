@@ -2,7 +2,7 @@ import { CreditCard } from "lucide-react";
 import { DashboardDetailRow } from "@/components/dashboard/dashboard-detail-row";
 import { DashboardEmptyState } from "@/components/dashboard/dashboard-empty-state";
 import { DashboardListCard } from "@/components/dashboard/dashboard-list-card";
-import { DashboardPageHeader } from "@/components/dashboard/dashboard-page-header";
+import { DashboardSubpageHeader } from "@/components/dashboard/dashboard-page-header";
 import { StatusBadge, formatCurrency } from "@/components/dashboard/status-badge";
 import { getCustomerInvoices } from "@/lib/actions/invoices";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,11 +12,7 @@ export default async function InvoicesPage() {
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      <DashboardPageHeader
-        eyebrow="Billing"
-        title="Invoices"
-        description="View billing status, due dates, and payment history. Tap a row to open invoice details."
-      />
+      <DashboardSubpageHeader />
 
       {invoices.length === 0 ? (
         <DashboardEmptyState

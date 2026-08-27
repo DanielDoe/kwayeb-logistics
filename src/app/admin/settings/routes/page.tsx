@@ -5,7 +5,7 @@ import { ADMIN_ROUTES } from "@/lib/admin/admin-catalog-data";
 export default function AdminRoutesPage() {
   return (
     <>
-      <AdminPageHeader eyebrow="Configuration" title="Routes" description="Origin–destination shipping routes and transit times." />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_ROUTES}
         getRowKey={(r) => r.id}

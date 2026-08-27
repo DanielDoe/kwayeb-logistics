@@ -5,7 +5,7 @@ import { ADMIN_CURRENCIES } from "@/lib/admin/admin-catalog-data";
 export default function AdminCurrenciesPage() {
   return (
     <>
-      <AdminPageHeader eyebrow="Configuration" title="Currencies" description="Billing currencies accepted by Kwayeb." />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_CURRENCIES}
         getRowKey={(r) => r.id}

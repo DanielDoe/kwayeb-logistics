@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { DEMO_INVOICE } from "@/lib/admin/workspace-demo-data";
 
 
@@ -14,26 +15,16 @@ export default function InvoiceDetailPage() {
 
     <>
 
+      <AdminPageHeader />
+
       <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
-
         <div>
-
-          <p className="text-sm font-semibold uppercase tracking-widest text-muted">Invoice</p>
-
-          <h1 className="font-mono text-2xl font-bold text-foreground">{invoice.invoiceNumber}</h1>
-
-          <p className="mt-2 text-3xl font-bold text-foreground">
-
+          <p className="text-3xl font-bold text-foreground">
             ${invoice.total.toLocaleString()}.00 {invoice.currency}
-
           </p>
-
           <span className="mt-2 inline-flex rounded-full bg-amber-500/10 px-3 py-1 text-xs font-bold text-amber-700">
-
             {invoice.statusLabel}
-
           </span>
-
         </div>
 
         <div className="flex flex-wrap gap-2">

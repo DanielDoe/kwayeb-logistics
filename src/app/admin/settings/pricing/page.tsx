@@ -6,11 +6,7 @@ export default function AdminPricingPage() {
 
   return (
     <>
-      <AdminPageHeader
-        eyebrow="Configuration"
-        title="Pricing"
-        description="Base freight rates used for estimates and quote preparation."
-      />
+      <AdminPageHeader />
       <div className="grid gap-4 sm:grid-cols-2">
         {rates.map(([method, rate]) => (
           <div key={method} className="rounded-xl border border-border bg-card p-5 shadow-sm">

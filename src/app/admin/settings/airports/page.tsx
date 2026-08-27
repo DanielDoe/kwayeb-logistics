@@ -5,7 +5,7 @@ import { ADMIN_AIRPORTS } from "@/lib/admin/admin-catalog-data";
 export default function AdminAirportsPage() {
   return (
     <>
-      <AdminPageHeader eyebrow="Configuration" title="Airports" description="Air cargo airports for express and air freight." />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_AIRPORTS}
         getRowKey={(r) => r.id}

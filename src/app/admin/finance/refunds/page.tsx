@@ -5,11 +5,7 @@ import { ADMIN_REFUNDS } from "@/lib/admin/admin-catalog-data";
 export default function AdminRefundsPage() {
   return (
     <>
-      <AdminPageHeader
-        eyebrow="Finance"
-        title="Refunds"
-        description="Review and process customer refund requests."
-      />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_REFUNDS}
         getRowKey={(row) => row.id}

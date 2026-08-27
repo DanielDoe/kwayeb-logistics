@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { AdminActionBanner } from "@/components/admin/admin-action-banner";
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { AdminShipmentDetailTabs } from "@/components/admin/admin-shipment-detail-tabs";
 import { AdminShipmentTimeline } from "@/components/admin/admin-shipment-timeline";
 import { getDemoShipment } from "@/lib/admin/workspace-demo-data";
@@ -30,26 +31,25 @@ export default async function ShipmentDetailPage({
         />
       ) : null}
 
-      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-mono text-xl font-bold text-foreground sm:text-2xl">{shipment.trackingId}</h1>
-            <span className="rounded-full bg-sky-500/10 px-3 py-1 text-xs font-bold text-sky-700">
-              {shipment.statusLabel}
-            </span>
-          </div>
-          <p className="mt-3 text-sm text-muted">
-            {shipment.origin} <span className="mx-2 text-[#ff6600]">───────────────→</span> {shipment.destination}
-          </p>
-          <p className="mt-1 text-sm text-muted">{shipment.freightType}</p>
-          <p className="mt-2 text-sm">
-            <span className="text-muted">Customer:</span>{" "}
-            <span className="font-medium text-foreground">{shipment.customer}</span>
-          </p>
-          <p className="text-sm text-muted">
-            ETD: {shipment.etd} · ETA: {shipment.eta}
-          </p>
+      <AdminPageHeader />
+
+      <div className="mb-6">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="rounded-full bg-sky-500/10 px-3 py-1 text-xs font-bold text-sky-700">
+            {shipment.statusLabel}
+          </span>
         </div>
+        <p className="mt-3 text-sm text-muted">
+          {shipment.origin} <span className="mx-2 text-[#ff6600]">───────────────→</span> {shipment.destination}
+        </p>
+        <p className="mt-1 text-sm text-muted">{shipment.freightType}</p>
+        <p className="mt-2 text-sm">
+          <span className="text-muted">Customer:</span>{" "}
+          <span className="font-medium text-foreground">{shipment.customer}</span>
+        </p>
+        <p className="text-sm text-muted">
+          ETD: {shipment.etd} · ETA: {shipment.eta}
+        </p>
       </div>
 
       <AdminShipmentTimeline steps={shipment.timeline} />

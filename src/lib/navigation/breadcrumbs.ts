@@ -169,16 +169,22 @@ function getDepartmentOverviewLabel(segment: string) {
   }
 }
 
+const ADMIN_OVERVIEW_PATHS = new Set([
+  "/admin",
+  "/admin/operations",
+  "/admin/warehouse",
+  "/admin/finance",
+  "/admin/support",
+]);
+
 export function buildAdminBreadcrumbs(pathname: string, role: string): BreadcrumbItem[] {
   const segments = pathname.split("/").filter(Boolean);
   if (segments[0] !== "admin") return [];
 
+  if (ADMIN_OVERVIEW_PATHS.has(pathname)) return [];
+
   const rootHref = getDefaultStaffRedirect(role);
   const rootLabel = role === "admin" ? "Staff portal" : getStaffRoleLabel(role);
-
-  if (segments.length === 1) {
-    return [{ label: "Overview", href: "/admin", icon: LayoutDashboard, current: true }];
-  }
 
   const items: BreadcrumbItem[] = [{ label: rootLabel, href: rootHref, icon: LayoutDashboard }];
   let cumulative = "/admin";
@@ -212,9 +218,7 @@ export function buildDashboardBreadcrumbs(pathname: string): BreadcrumbItem[] {
   const segments = pathname.split("/").filter(Boolean);
   if (segments[0] !== "dashboard") return [];
 
-  if (segments.length === 1) {
-    return [{ label: "Overview", href: "/dashboard", icon: LayoutDashboard, current: true }];
-  }
+  if (pathname === "/dashboard") return [];
 
   const items: BreadcrumbItem[] = [{ label: "Customer portal", href: "/dashboard", icon: LayoutDashboard }];
   let cumulative = "/dashboard";

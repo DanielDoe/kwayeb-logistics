@@ -5,7 +5,7 @@ import { ADMIN_COUNTRIES } from "@/lib/admin/admin-catalog-data";
 export default function AdminCountriesPage() {
   return (
     <>
-      <AdminPageHeader eyebrow="Configuration" title="Countries" description="Supported destination countries and regions." />
+      <AdminPageHeader />
       <AdminDataTable
         rows={ADMIN_COUNTRIES}
         getRowKey={(r) => r.id}
