@@ -1,41 +1,107 @@
-import { DashboardShell } from "@/components/dashboard/dashboard-shell";
+import { Package } from "lucide-react";
+import { DashboardDetailRow } from "@/components/dashboard/dashboard-detail-row";
+import { DashboardEmptyState } from "@/components/dashboard/dashboard-empty-state";
+import { DashboardListCard, DashboardListToolbar } from "@/components/dashboard/dashboard-list-card";
+import { DashboardPageHeader } from "@/components/dashboard/dashboard-page-header";
+import { StatusBadge } from "@/components/dashboard/status-badge";
 import { getCustomerShipments } from "@/lib/actions/quotes";
-import Link from "next/link";
+import { ButtonLink } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default async function ShipmentsPage() {
   const shipments = await getCustomerShipments();
 
   return (
-    <DashboardShell>
-      <h1 className="text-2xl font-bold text-foreground">Shipments</h1>
-      <p className="mt-1 text-muted">View and track all your shipments.</p>
+    <div className="space-y-4 sm:space-y-6">
+      <DashboardPageHeader
+        eyebrow="Logistics"
+        title="Shipments"
+        description="View and track all your active and completed shipments. Tap a row to see full tracking details."
+      />
 
       {shipments.length === 0 ? (
-        <p className="mt-8 text-muted">No shipments found. Submit a quote request to get started.</p>
+        <DashboardEmptyState
+          icon={Package}
+          title="No shipments found"
+          description="Submit a quote request and book freight to start tracking shipments here."
+          actionLabel="Request a quote"
+          actionHref="/dashboard/quotes/new"
+        />
       ) : (
-        <div className="mt-8 overflow-x-auto rounded-xl border border-border">
-          <table className="w-full text-sm">
-            <thead className="border-b border-border bg-surface">
-              <tr>
-                <th className="px-4 py-3 text-left font-medium text-muted">Tracking ID</th>
-                <th className="px-4 py-3 text-left font-medium text-muted">Destination</th>
-                <th className="px-4 py-3 text-left font-medium text-muted">Status</th>
-                <th className="px-4 py-3 text-left font-medium text-muted">Method</th>
-              </tr>
-            </thead>
-            <tbody>
-              {shipments.map((s) => (
-                <tr key={s.id} className="border-b border-border">
-                  <td className="px-4 py-3"><Link href="/track" className="font-mono text-accent-text hover:underline">{s.tracking_id}</Link></td>
-                  <td className="px-4 py-3 text-foreground">{s.destination}</td>
-                  <td className="px-4 py-3 text-muted">{s.status}</td>
-                  <td className="px-4 py-3 text-muted">{s.freight_type ?? "—"}</td>
-                </tr>
+        <Card>
+          <CardContent className="p-0">
+            <DashboardListToolbar>
+              <ButtonLink href="/dashboard/track" size="sm" variant="secondary" className="w-full sm:w-auto">
+                Track by ID
+              </ButtonLink>
+            </DashboardListToolbar>
+
+            <div className="md:hidden">
+              {shipments.map((shipment) => (
+                <DashboardListCard
+                  key={shipment.id}
+                  href={`/dashboard/track?id=${encodeURIComponent(shipment.tracking_id)}`}
+                  title={shipment.tracking_id}
+                  status={shipment.status}
+                  fields={[
+                    {
+                      label: "Destination",
+                      value: `${shipment.destination} (${shipment.destination_country})`,
+                    },
+                    { label: "Method", value: shipment.freight_type ?? "—" },
+                    {
+                      label: "Est. delivery",
+                      value: shipment.estimated_delivery
+                        ? new Date(shipment.estimated_delivery).toLocaleDateString()
+                        : "—",
+                    },
+                  ]}
+                />
               ))}
-            </tbody>
-          </table>
-        </div>
+            </div>
+
+            <div className="hidden overflow-x-auto md:block">
+              <table className="w-full min-w-[640px] text-sm">
+                <thead className="border-b border-border bg-surface">
+                  <tr>
+                    <th className="px-4 py-3 text-left font-medium text-muted">Tracking ID</th>
+                    <th className="px-4 py-3 text-left font-medium text-muted">Destination</th>
+                    <th className="px-4 py-3 text-left font-medium text-muted">Status</th>
+                    <th className="px-4 py-3 text-left font-medium text-muted">Method</th>
+                    <th className="px-4 py-3 text-left font-medium text-muted">Est. delivery</th>
+                    <th className="px-4 py-3 text-right font-medium text-muted">Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {shipments.map((shipment) => (
+                    <DashboardDetailRow
+                      key={shipment.id}
+                      href={`/dashboard/track?id=${encodeURIComponent(shipment.tracking_id)}`}
+                    >
+                      <td className="px-4 py-3 font-mono font-medium text-accent-text">
+                        {shipment.tracking_id}
+                      </td>
+                      <td className="px-4 py-3 text-foreground">
+                        {shipment.destination}
+                        <span className="ml-1 text-muted">({shipment.destination_country})</span>
+                      </td>
+                      <td className="px-4 py-3">
+                        <StatusBadge status={shipment.status} />
+                      </td>
+                      <td className="px-4 py-3 text-muted">{shipment.freight_type ?? "—"}</td>
+                      <td className="px-4 py-3 text-muted">
+                        {shipment.estimated_delivery
+                          ? new Date(shipment.estimated_delivery).toLocaleDateString()
+                          : "—"}
+                      </td>
+                    </DashboardDetailRow>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
       )}
-    </DashboardShell>
+    </div>
   );
 }

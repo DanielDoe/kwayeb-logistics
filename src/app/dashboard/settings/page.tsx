@@ -1,14 +1,48 @@
-import { DashboardShell } from "@/components/dashboard/dashboard-shell";
 import { AppearanceSettings } from "@/components/theme/appearance-settings";
+import { DashboardPageHeader } from "@/components/dashboard/dashboard-page-header";
+import { getUserProfile } from "@/lib/supabase/server-auth";
+import { Card, CardContent } from "@/components/ui/card";
 
-export default function SettingsPage() {
+export default async function SettingsPage() {
+  const profile = await getUserProfile();
+
   return (
-    <DashboardShell>
-      <h1 className="text-2xl font-bold text-foreground">Settings</h1>
-      <p className="mt-1 text-muted">Manage your profile, appearance, and notification preferences.</p>
-      <div className="mt-8">
-        <AppearanceSettings />
-      </div>
-    </DashboardShell>
+    <div className="space-y-4 sm:space-y-6">
+      <DashboardPageHeader
+        eyebrow="Account"
+        title="Settings"
+        description="Manage your profile, appearance, and notification preferences."
+      />
+
+      <Card>
+        <CardContent className="space-y-3 p-4 sm:p-6">
+          <h2 className="font-semibold text-foreground">Profile</h2>
+          <dl className="grid gap-4 sm:grid-cols-2">
+            <div className="rounded-xl border border-border bg-surface/50 p-4">
+              <dt className="text-xs font-semibold uppercase tracking-wide text-muted">Name</dt>
+              <dd className="mt-1 text-sm font-medium text-foreground">{profile?.full_name ?? "—"}</dd>
+            </div>
+            <div className="rounded-xl border border-border bg-surface/50 p-4">
+              <dt className="text-xs font-semibold uppercase tracking-wide text-muted">Email</dt>
+              <dd className="mt-1 text-sm font-medium text-foreground">{profile?.email ?? "—"}</dd>
+            </div>
+            <div className="rounded-xl border border-border bg-surface/50 p-4">
+              <dt className="text-xs font-semibold uppercase tracking-wide text-muted">Account type</dt>
+              <dd className="mt-1 text-sm font-medium text-foreground">
+                {profile?.role === "business" ? "Business" : "Customer"}
+              </dd>
+            </div>
+            {profile?.company ? (
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <dt className="text-xs font-semibold uppercase tracking-wide text-muted">Company</dt>
+                <dd className="mt-1 text-sm font-medium text-foreground">{profile.company}</dd>
+              </div>
+            ) : null}
+          </dl>
+        </CardContent>
+      </Card>
+
+      <AppearanceSettings />
+    </div>
   );
 }

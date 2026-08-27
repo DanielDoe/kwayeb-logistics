@@ -20,4 +20,5 @@ export const trackingQuerySchema = z.object({
     .string()
     .min(3, "Tracking ID is required")
     .transform((v) => v.trim().toUpperCase()),
+  carrierCode: z.string().optional(),
 });

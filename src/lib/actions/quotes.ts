@@ -1,13 +1,36 @@
 "use server";
 
+import { isSupabaseConfigured } from "@/lib/auth/env";
+import {
+  addDemoQuote,
+  addDemoSupportTicket,
+  ensureDemoDataSeeded,
+  getDemoDashboardStats,
+  getDemoQuotes,
+  getDemoQuoteById,
+  getDemoShipments,
+} from "@/lib/auth/demo-data";
+import { getDemoSession } from "@/lib/auth/demo-session";
+import { isCustomerRole } from "@/lib/auth/roles";
 import { createAdminClient } from "@/lib/supabase/server";
-import { createAuthClient } from "@/lib/supabase/server-auth";
+import { getSessionUser } from "@/lib/supabase/server-auth";
 import { generateQuoteNumber } from "@/lib/pricing/estimator";
 import { quoteWizardSchema, type QuoteWizardInput } from "@/lib/validations/quotes";
 
 export type ActionResult =
   | { success: true; quoteNumber: string; id: string }
   | { success: false; error: string };
+
+async function ensureDemoSeed() {
+  const demo = await getDemoSession();
+  if (!demo || !isCustomerRole(demo.role)) return;
+  await ensureDemoDataSeeded({
+    userId: demo.id,
+    email: demo.email,
+    fullName: demo.fullName,
+    role: demo.role,
+  });
+}
 
 export async function submitQuoteRequest(input: QuoteWizardInput): Promise<ActionResult> {
   const parsed = quoteWizardSchema.safeParse(input);
@@ -19,8 +42,19 @@ export async function submitQuoteRequest(input: QuoteWizardInput): Promise<Actio
   const quoteNumber = generateQuoteNumber();
 
   try {
-    const authClient = await createAuthClient();
-    const { data: { user } } = await authClient.auth.getUser();
+    const user = await getSessionUser();
+
+    if (!isSupabaseConfigured()) {
+      if (!user) {
+        return { success: false, error: "Sign in to submit a quote request." };
+      }
+      const quote = await addDemoQuote(user.id, {
+        destination_country: data.destinationCountry,
+        freight_method: data.freightMethod ?? null,
+      });
+      return { success: true, quoteNumber: quote.quote_number, id: quote.id };
+    }
+
     const supabase = createAdminClient();
 
     const { data: row, error } = await supabase
@@ -82,9 +116,13 @@ export async function submitQuoteRequest(input: QuoteWizardInput): Promise<Actio
 }
 
 export async function getCustomerQuotes() {
-  const authClient = await createAuthClient();
-  const { data: { user } } = await authClient.auth.getUser();
+  const user = await getSessionUser();
   if (!user) return [];
+
+  if (!isSupabaseConfigured()) {
+    await ensureDemoSeed();
+    return getDemoQuotes(user.id);
+  }
 
   const supabase = createAdminClient();
   const { data } = await supabase
@@ -97,10 +135,51 @@ export async function getCustomerQuotes() {
   return data ?? [];
 }
 
+export type CustomerQuoteDetail = {
+  id: string;
+  quote_number: string;
+  status: string;
+  destination_country: string;
+  freight_method: string | null;
+  created_at: string;
+  origin_country?: string | null;
+  origin_city?: string | null;
+  destination_city?: string | null;
+  item_description?: string | null;
+  contact_name?: string | null;
+  contact_email?: string | null;
+};
+
+export async function getCustomerQuoteById(id: string): Promise<CustomerQuoteDetail | null> {
+  const user = await getSessionUser();
+  if (!user) return null;
+
+  if (!isSupabaseConfigured()) {
+    await ensureDemoSeed();
+    return getDemoQuoteById(user.id, id);
+  }
+
+  const supabase = createAdminClient();
+  const { data } = await supabase
+    .from("kwayeb_quote_requests")
+    .select(
+      "id, quote_number, status, destination_country, freight_method, created_at, origin_country, origin_city, destination_city, item_description, contact_name, contact_email",
+    )
+    .eq("id", id)
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  return data;
+}
+
 export async function getCustomerShipments() {
-  const authClient = await createAuthClient();
-  const { data: { user } } = await authClient.auth.getUser();
+  const user = await getSessionUser();
   if (!user) return [];
+
+  if (!isSupabaseConfigured()) {
+    await ensureDemoSeed();
+    return getDemoShipments(user.id);
+  }
 
   const supabase = createAdminClient();
   const { data } = await supabase
@@ -114,9 +193,13 @@ export async function getCustomerShipments() {
 }
 
 export async function getDashboardStats() {
-  const authClient = await createAuthClient();
-  const { data: { user } } = await authClient.auth.getUser();
+  const user = await getSessionUser();
   if (!user) return null;
+
+  if (!isSupabaseConfigured()) {
+    await ensureDemoSeed();
+    return getDemoDashboardStats(user.id);
+  }
 
   const supabase = createAdminClient();
   const [quotes, shipments, invoices] = await Promise.all([

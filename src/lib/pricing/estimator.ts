@@ -101,3 +101,9 @@ export function generateTicketNumber(): string {
   const seq = String(Date.now() % 100000).padStart(5, "0");
   return `TKT-${seq}`;
 }
+
+export function generateInvoiceNumber(): string {
+  const year = new Date().getFullYear();
+  const seq = String(Date.now() % 100000).padStart(5, "0");
+  return `INV-${year}-${seq}`;
+}

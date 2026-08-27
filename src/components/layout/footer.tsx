@@ -73,16 +73,16 @@ export function Footer() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#071526] via-transparent to-[#071526]/40" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-8 pt-16 sm:px-6 lg:px-8 lg:pt-20">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-          <div className="sm:col-span-2 lg:col-span-4">
+      <div className="relative mx-auto max-w-7xl px-4 pb-8 pt-12 sm:px-6 sm:pt-16 lg:px-8 lg:pt-20">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
+          <div className="flex flex-col items-center text-center lg:col-span-4 lg:items-start lg:text-left">
             <Logo size="sm" variant="light" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-400">
               Connecting international customers with reliable shipping and product sourcing from
               China. We serve Europe, Africa, the Americas, and beyond.
             </p>
 
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-5 flex flex-wrap justify-center gap-2 lg:justify-start">
               {[
                 { icon: Shield, label: "Secure" },
                 { icon: CheckCircle2, label: "Reliable" },
@@ -98,7 +98,7 @@ export function Footer() {
               ))}
             </div>
 
-            <div className="mt-6 flex items-center gap-2.5">
+            <div className="mt-6 flex items-center justify-center gap-2.5 lg:justify-start">
               {SOCIALS.map((s) => (
                 <a
                   key={s.label}
@@ -114,62 +114,66 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="lg:col-span-2">
-            <h3 className="text-sm font-bold text-white">Services</h3>
-            <ul className="mt-4 space-y-2.5">
-              {SERVICES.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="text-sm text-slate-400 transition hover:text-[#ff6600]">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="mx-auto grid w-full max-w-sm grid-cols-2 gap-x-6 gap-y-10 sm:max-w-none lg:col-span-6 lg:grid-cols-3 lg:gap-8">
+            <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
+              <h3 className="text-sm font-bold text-white">Services</h3>
+              <ul className="mt-4 space-y-2.5">
+                {SERVICES.map((link) => (
+                  <li key={link.label}>
+                    <Link href={link.href} className="text-sm text-slate-400 transition hover:text-[#ff6600]">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
+              <h3 className="text-sm font-bold text-white">Company</h3>
+              <ul className="mt-4 space-y-2.5">
+                {COMPANY.map((link) => (
+                  <li key={link.label}>
+                    <Link href={link.href} className="text-sm text-slate-400 transition hover:text-[#ff6600]">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="col-span-2 flex flex-col items-center text-center sm:col-span-1 sm:items-start sm:text-left">
+              <h3 className="text-sm font-bold text-white">Popular Routes</h3>
+              <ul className="mt-4 space-y-2.5">
+                {ROUTES.map((route) => (
+                  <li key={route}>
+                    <Link
+                      href="/routes"
+                      className="group inline-flex items-center gap-1.5 text-sm text-slate-400 transition hover:text-[#ff6600]"
+                    >
+                      {route}
+                      <ArrowRight className="h-3 w-3 opacity-0 transition group-hover:opacity-100" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/routes"
+                className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#ff6600] transition hover:gap-2"
+              >
+                View all routes
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
           </div>
 
-          <div className="lg:col-span-2">
-            <h3 className="text-sm font-bold text-white">Company</h3>
-            <ul className="mt-4 space-y-2.5">
-              {COMPANY.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="text-sm text-slate-400 transition hover:text-[#ff6600]">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="lg:col-span-2">
-            <h3 className="text-sm font-bold text-white">Popular Routes</h3>
-            <ul className="mt-4 space-y-2.5">
-              {ROUTES.map((route) => (
-                <li key={route}>
-                  <Link
-                    href="/routes"
-                    className="group inline-flex items-center gap-1.5 text-sm text-slate-400 transition hover:text-[#ff6600]"
-                  >
-                    {route}
-                    <ArrowRight className="h-3 w-3 opacity-0 transition group-hover:opacity-100" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/routes"
-              className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#ff6600] transition hover:gap-2"
-            >
-              View all routes
-              <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-
-          <div className="sm:col-span-2 lg:col-span-2">
+          <div className="flex w-full flex-col items-center text-center lg:col-span-2 lg:items-start lg:text-left">
             <h3 className="text-sm font-bold text-white">Stay Updated</h3>
-            <p className="mt-4 text-sm leading-relaxed text-slate-400">
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
               Get shipping tips and rate updates from China to the world.
             </p>
-            <FooterNewsletter />
+            <div className="w-full max-w-md">
+              <FooterNewsletter />
+            </div>
             <a
               href={`mailto:${SITE.email}`}
               className="mt-4 inline-flex items-center gap-2 text-sm text-slate-400 transition hover:text-white"
@@ -180,7 +184,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
+        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-center text-xs text-slate-500 sm:mt-14 sm:flex-row sm:text-left">
           <p>
             © {new Date().getFullYear()} {SITE.name}. All rights reserved.
           </p>

@@ -1,5 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { getDemoSession } from "@/lib/auth/demo-session";
+import { isSupabaseConfigured } from "@/lib/auth/env";
 import type { Database } from "@/types/database";
 
 export async function createAuthClient() {
@@ -28,14 +30,42 @@ export async function createAuthClient() {
 }
 
 export async function getSessionUser() {
+  const demo = await getDemoSession();
+  if (demo) {
+    return { id: demo.id, email: demo.email };
+  }
+
+  if (!isSupabaseConfigured()) return null;
+
   const supabase = await createAuthClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   return user;
 }
 
 export async function getUserProfile() {
+  const demo = await getDemoSession();
+  if (demo) {
+    return {
+      id: demo.id,
+      email: demo.email,
+      full_name: demo.fullName,
+      company: demo.company,
+      phone: null,
+      whatsapp: null,
+      role: demo.role,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+  }
+
+  if (!isSupabaseConfigured()) return null;
+
   const supabase = await createAuthClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) return null;
 
   const { data: profile } = await supabase

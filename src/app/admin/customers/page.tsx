@@ -1,12 +1,31 @@
-import { AdminShell } from "@/components/admin/admin-shell";
-import { Card, CardContent } from "@/components/ui/card";
+import { fetchAdminCustomers } from "@/lib/actions/admin";
+import { AdminDataTable, AdminStatusBadge } from "@/components/admin/admin-data-table";
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
 
-export default function AdminCustomersPage() {
+export default async function AdminCustomersPage() {
+  const customers = await fetchAdminCustomers();
+
   return (
-    <AdminShell>
-      <h1 className="text-2xl font-bold text-foreground">Customers</h1>
-      <p className="mt-1 text-muted">View registered customer accounts.</p>
-      <Card className="mt-8"><CardContent className="p-6 text-muted">Customer management coming in the next phase.</CardContent></Card>
-    </AdminShell>
+    <>
+      <AdminPageHeader
+        eyebrow="Customers"
+        title="Customers"
+        description="All customer and business accounts across Kwayeb Logistics."
+      />
+      <AdminDataTable
+        rows={customers}
+        getRowKey={(row) => row.id}
+        columns={[
+          { key: "name", header: "Name", render: (r) => r.full_name ?? "—" },
+          { key: "email", header: "Email", render: (r) => r.email },
+          { key: "company", header: "Company", render: (r) => r.company ?? "—" },
+          {
+            key: "type",
+            header: "Type",
+            render: (r) => <AdminStatusBadge label={r.role} tone={r.role === "business" ? "default" : "success"} />,
+          },
+        ]}
+      />
+    </>
   );
 }

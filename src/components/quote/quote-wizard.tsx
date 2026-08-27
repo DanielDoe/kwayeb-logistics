@@ -6,7 +6,7 @@ import { SHIPPING_ROUTES, PRODUCT_CATEGORIES } from "@/lib/constants";
 import { FREIGHT_METHODS } from "@/lib/constants/logistics";
 import { submitQuoteRequest } from "@/lib/actions/quotes";
 import type { QuoteWizardInput } from "@/lib/validations/quotes";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonLink } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
@@ -56,9 +56,27 @@ const INITIAL: QuoteWizardInput = {
   additionalNotes: "",
 };
 
-export function QuoteWizard() {
+interface QuoteWizardProps {
+  prefillContact?: {
+    fullName?: string;
+    email?: string;
+    company?: string;
+  };
+  quotesListHref?: string;
+}
+
+function buildInitialForm(prefill?: QuoteWizardProps["prefillContact"]): QuoteWizardInput {
+  return {
+    ...INITIAL,
+    contactName: prefill?.fullName ?? INITIAL.contactName,
+    contactEmail: prefill?.email ?? INITIAL.contactEmail,
+    company: prefill?.company ?? INITIAL.company,
+  };
+}
+
+export function QuoteWizard({ prefillContact, quotesListHref }: QuoteWizardProps = {}) {
   const [step, setStep] = useState(0);
-  const [form, setForm] = useState<QuoteWizardInput>(INITIAL);
+  const [form, setForm] = useState<QuoteWizardInput>(() => buildInitialForm(prefillContact));
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<{ quoteNumber: string } | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -92,26 +110,38 @@ export function QuoteWizard() {
         <h3 className="mt-4 text-xl font-bold text-foreground">Quote request submitted!</h3>
         <p className="mt-2 font-mono text-accent-text">{result.quoteNumber}</p>
         <p className="mt-2 text-muted">We&apos;ll respond within 24 hours with a formal quotation.</p>
+        {quotesListHref ? (
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <ButtonLink href={quotesListHref} size="sm">
+              View your quotes
+            </ButtonLink>
+            <ButtonLink href="/dashboard" size="sm" variant="secondary">
+              Back to overview
+            </ButtonLink>
+          </div>
+        ) : null}
       </div>
     );
   }
 
   return (
     <div>
-      <div className="mb-8 flex flex-wrap gap-2">
+      <div className="mb-6 -mx-1 overflow-x-auto px-2 py-2.5 pb-3 sm:mx-0 sm:px-0">
+        <div className="flex w-max min-w-full gap-2.5 sm:w-auto sm:flex-wrap sm:gap-2">
         {STEPS.map((label, i) => (
           <button
             key={label}
             type="button"
             onClick={() => i < step && setStep(i)}
             className={cn(
-              "rounded-full px-3 py-1 text-xs font-medium transition",
+              "shrink-0 rounded-full px-3.5 py-2 text-xs font-medium transition sm:px-3 sm:py-1.5",
               i === step ? "bg-accent-soft text-accent-text" : i < step ? "bg-surface text-muted" : "text-muted/50",
             )}
           >
             {i + 1}. {label}
           </button>
         ))}
+        </div>
       </div>
 
       {error && (
@@ -253,16 +283,16 @@ export function QuoteWizard() {
         </div>
       )}
 
-      <div className="mt-8 flex justify-between">
-        <Button type="button" variant="secondary" disabled={step === 0} onClick={() => setStep((s) => s - 1)}>
+      <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
+        <Button type="button" variant="secondary" disabled={step === 0} onClick={() => setStep((s) => s - 1)} className="w-full sm:w-auto">
           <ChevronLeft className="h-4 w-4" /> Back
         </Button>
         {step < STEPS.length - 1 ? (
-          <Button type="button" onClick={() => setStep((s) => s + 1)}>
+          <Button type="button" onClick={() => setStep((s) => s + 1)} className="w-full sm:w-auto">
             Next <ChevronRight className="h-4 w-4" />
           </Button>
         ) : (
-          <Button type="button" disabled={isPending} onClick={handleSubmit}>
+          <Button type="button" disabled={isPending} onClick={handleSubmit} className="w-full sm:w-auto">
             {isPending ? <><Loader2 className="h-4 w-4 animate-spin" /> Submitting...</> : "Submit Quote Request"}
           </Button>
         )}

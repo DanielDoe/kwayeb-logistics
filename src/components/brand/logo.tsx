@@ -3,14 +3,23 @@ import { cn } from "@/lib/utils";
 interface LogoProps {
   className?: string;
   showText?: boolean;
+  /** Icon-only mark for tight headers (same as showText={false}). */
+  compact?: boolean;
   size?: "sm" | "md";
   variant?: "default" | "light";
 }
 
-export function Logo({ className, showText = true, size = "md", variant = "default" }: LogoProps) {
+export function Logo({
+  className,
+  showText = true,
+  compact = false,
+  size = "md",
+  variant = "default",
+}: LogoProps) {
   const iconSize = size === "sm" ? "h-8 w-8" : "h-10 w-10";
   const textSize = size === "sm" ? "text-[15px]" : "text-xl";
   const isLight = variant === "light";
+  const displayText = showText && !compact;
 
   return (
     <div className={cn("flex items-center gap-2.5", className)}>
@@ -27,7 +36,7 @@ export function Logo({ className, showText = true, size = "md", variant = "defau
           />
         </svg>
       </div>
-      {showText && (
+      {displayText && (
         <p
           className={cn(
             "font-bold leading-none tracking-tight",

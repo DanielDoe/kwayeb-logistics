@@ -97,5 +97,16 @@ export type ContactInput = z.infer<typeof contactSchema>;
 export const authSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6, "Password must be at least 6 characters"),
-  fullName: z.string().optional(),
+  fullName: z.string().min(2, "Full name is required").optional(),
+  role: z.enum(["customer", "business"]).default("customer"),
+  company: z.string().optional(),
 });
+
+export const signUpSchema = authSchema
+  .extend({
+    confirmPassword: z.string().min(6, "Please confirm your password"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
